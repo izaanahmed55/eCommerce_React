@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { removeSelectedProduct } from "../redux/actions/productActions";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
 
@@ -89,9 +90,11 @@ const Cart = () => {
               <p className="text-sm text-gray-700">including VAT</p>
             </div>
           </div>
-          <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
-            Check out
-          </button>
+          <Link to={`/checkout`}>
+            <button className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
+              Check Out
+            </button>
+          </Link>
         </div>
         </div>
         </div>
