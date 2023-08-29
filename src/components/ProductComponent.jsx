@@ -40,7 +40,6 @@ const ProductComponent = () => {
     const setProductKey = (product) => {
 
         if (product.stock > 0) {
-            // Swal.fire( 'Item Added!', 'Item added in your cart.', 'success' );
             const myCartLocalStorage = localStorage.getItem("myCart");
             const cartClone = myCartLocalStorage ? JSON.parse(myCartLocalStorage) : []; 
             
@@ -62,7 +61,6 @@ const ProductComponent = () => {
                                 return eachCartItem; 
                             }); 
                             
-                            // Swal.fire( 'Quantity Updated', 'Product quantity updated', 'success' );
                             quantityUpdateAlert();
                             localStorage.setItem("myCart", JSON.stringify(updatedCartAsOfClone));
                         } 

@@ -58,7 +58,6 @@ const ProductDetails = () => {
         dispatch({ type: ActionTypes.ADD_TO_CART, payload: data });
 
         if (product.stock > 0) {
-            // Swal.fire("Item Added!", "Item added in your cart.", "success");
             const myCartLocalStorage = localStorage.getItem("myCart");
             const cartClone = myCartLocalStorage
                 ? JSON.parse(myCartLocalStorage)
@@ -91,11 +90,6 @@ const ProductDetails = () => {
                             }
                         );
 
-                        // Swal.fire(
-                        //     "Quantity Updated",
-                        //     "Product quantity updated",
-                        //     "success"
-                        // );
                         quantityUpdateAlert();
                         localStorage.setItem(
                             "myCart",
