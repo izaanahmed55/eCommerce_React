@@ -2,17 +2,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { cartCounter } from "../redux/actions/productActions";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductComponent = () => {
 
     const dispatch = useDispatch()
 
     const products = useSelector((state) => state?.allProducts?.products?.products);
+
+    const addToCartAlert = () => {
+        toast('✔ Item Added to Cart', {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+    }
+
+    const quantityUpdateAlert = () => {
+        toast('✔ Quantity Updated', {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+    }
  
     const setProductKey = (product) => {
 
         if (product.stock > 0) {
-            Swal.fire( 'Item Added!', 'Item added in your cart.', 'success' );
+            // Swal.fire( 'Item Added!', 'Item added in your cart.', 'success' );
             const myCartLocalStorage = localStorage.getItem("myCart");
             const cartClone = myCartLocalStorage ? JSON.parse(myCartLocalStorage) : []; 
             
@@ -34,7 +62,8 @@ const ProductComponent = () => {
                                 return eachCartItem; 
                             }); 
                             
-                            Swal.fire( 'Quantity Updated', 'Product quantity updated', 'success' );
+                            // Swal.fire( 'Quantity Updated', 'Product quantity updated', 'success' );
+                            quantityUpdateAlert();
                             localStorage.setItem("myCart", JSON.stringify(updatedCartAsOfClone));
                         } 
                     }
@@ -42,6 +71,7 @@ const ProductComponent = () => {
             } 
 
             else{ 
+                addToCartAlert()
                 cartClone.push(product);
                 localStorage.setItem("myCart", JSON.stringify(cartClone)); 
                 dispatch(cartCounter(cartClone.length))
@@ -87,6 +117,7 @@ const ProductComponent = () => {
         }
     </div>
     </div>
+    <ToastContainer/>
     </>
 };
 
