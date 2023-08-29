@@ -12,6 +12,7 @@ const Header = () => {
 
   const searchHandler = (e) => {
     e.preventDefault();
+    setInput(e.target.value)
     getSearched();
 }
 
@@ -42,14 +43,14 @@ const getSearched = async () => {
           type="text" 
           className="w-full rounded-md border border-[#DDE2E4] px-3 py-2 text-sm" 
           placeholder="Search Product"
-          onChange={(e) => setInput(e.target.value)}
+          onChange={e => searchHandler(e)}
           value={input}
           name="Product Search" 
         />
 
         <div className="flex cursor-pointer select-none items-center gap-x-2 rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
           <span className="text-sm font-medium">
-            <button className="border-2px" onClick={searchHandler}> Search </button>
+            <button className="border-2px"> Search </button>
           </span>
         </div>
 
