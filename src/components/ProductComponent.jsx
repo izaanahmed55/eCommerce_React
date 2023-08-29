@@ -13,7 +13,7 @@ const ProductComponent = () => {
 
     const addToCartAlert = () => {
         toast('✔ Item Added to Cart', {
-            position: "top-right",
+            position: "bottom-right",
             autoClose: 4000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -26,7 +26,7 @@ const ProductComponent = () => {
 
     const quantityUpdateAlert = () => {
         toast('✔ Quantity Updated', {
-            position: "top-right",
+            position: "bottom-right",
             autoClose: 4000,
             hideProgressBar: false,
             closeOnClick: true,
