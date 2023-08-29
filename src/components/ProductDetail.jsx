@@ -64,9 +64,7 @@ const ProductDetails = () => {
                 ? JSON.parse(myCartLocalStorage)
                 : [];
 
-            let isPresentInCart = cartClone.filter(
-                (eachCartItem) => eachCartItem.id == product.id
-            );
+            let isPresentInCart = cartClone?.filter(eachCartItem => eachCartItem.id == product.id);
 
             if (isPresentInCart.length > 0) {
                 Swal.fire({

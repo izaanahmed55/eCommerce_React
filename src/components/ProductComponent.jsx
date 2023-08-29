@@ -45,7 +45,7 @@ const ProductComponent = () => {
             const cartClone = myCartLocalStorage ? JSON.parse(myCartLocalStorage) : []; 
             
             
-            let isPresentInCart = cartClone.filter(eachCartItem => eachCartItem.id == product.id);
+            let isPresentInCart = cartClone?.filter(eachCartItem => eachCartItem.id == product.id);
             
             if(isPresentInCart.length > 0) {
                 Swal.fire({ title: 'Item already in your cart, Do you want to update the quantity ?', 
