@@ -7,6 +7,7 @@ import Cart from './components/Cart'
 import CheckOut from './components/CheckOut'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
+import { useEffect } from 'react'
 
 function App() {
 
