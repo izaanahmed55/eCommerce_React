@@ -25,26 +25,25 @@ const Header = () => {
     };
 
     return (
-        <div className="bg-white">
+        <div className="bg-black">
             <div className="border py-3 px-6">
                 <div className="flex justify-between">
                     <Link to={`/`}>
                         <div className="flex items-center">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 text-red-500"
-                                fill="none"
                                 viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth="2"
+                                fill="none"
+                                stroke="white"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
                             >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
-                                />
+                                <circle cx="9" cy="21" r="1" />
+                                <circle cx="20" cy="21" r="1" />
+                                <path d="M1 1h4l2.25 10.46a2 2 0 0 0 2.74 1.14l8.11-4.78M5.25 15.46L6.5 9" />
                             </svg>
-                            <span className="ml-2 font-semibold text-[#252C32]">
+                            <span className="ml-2 font-semibold text-white">
                                 Shop Now
                             </span>
                         </div>
@@ -70,11 +69,11 @@ const Header = () => {
 
                     <div className="ml-2 flex">
                         <Link to={`/cart`}>
-                            <div className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-gray-100">
+                            <div className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-white">
                                 <div className="relative">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="h-5 w-5 text-gray-500"
+                                        className="h-7 w-7 text-white"
                                         viewBox="0 0 20 20"
                                         fill="currentColor"
                                     >
@@ -90,9 +89,11 @@ const Header = () => {
                             </div>
                         </Link>
 
-                        <div className="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border py-2 px-4 hover:bg-gray-100">
-                            <span className="text-sm font-medium">Sign in</span>
-                        </div>
+                        <Link to={`/signin`}>
+                          <div className="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border py-2 px-4 text-white">
+                              <span className="text-sm font-medium">Sign in</span>
+                          </div>
+                        </Link>
                     </div>
                 </div>
 
@@ -100,7 +101,7 @@ const Header = () => {
                     <div className="flex gap-x-2 py-1 px-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5 text-gray-500"
+                            className="h-5 w-5 text-white"
                             viewBox="0 0 20 20"
                             fill="currentColor"
                         >
@@ -110,7 +111,7 @@ const Header = () => {
                                 clipRule="evenodd"
                             />
                         </svg>
-                        <span className="text-sm font-medium">California</span>
+                        <span className="text-md text-white font-medium">Houston, Texas</span>
                     </div>
 
                     {/* <div className="flex gap-x-8">
