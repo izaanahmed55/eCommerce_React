@@ -69,7 +69,7 @@ const Header = () => {
 
                     <div className="ml-2 flex">
                         <Link to={`/cart`}>
-                            <div className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-white">
+                            <div className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4">
                                 <div className="relative">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +83,7 @@ const Header = () => {
                                         {noOfItems ? noOfItems : 0}
                                     </span>
                                 </div>
-                                <span className="text-sm font-medium">
+                                <span className="text-sm text-white font-medium">
                                     Cart
                                 </span>
                             </div>
@@ -111,7 +111,7 @@ const Header = () => {
                                 clipRule="evenodd"
                             />
                         </svg>
-                        <span className="text-md text-white font-medium">Houston, Texas</span>
+                        <span className="text-md text-white font-medium">Pakistan</span>
                     </div>
 
                     {/* <div className="flex gap-x-8">

@@ -10,6 +10,10 @@ import SignUp from './components/SignUp'
 
 function App() {
 
+  useEffect(() => {
+    window.localStorage.clear();
+  }, []);
+
   return (
     <div className='App'>
       <Router>
