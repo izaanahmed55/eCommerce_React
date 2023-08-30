@@ -48,12 +48,6 @@ const getSearched = async () => {
           name="Product Search" 
         />
 
-        <div className="flex cursor-pointer select-none items-center gap-x-2 rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
-          <span className="text-sm font-medium">
-            <button className="border-2px"> Search </button>
-          </span>
-        </div>
-
       </div>
 
       <Link to={`/cart`}>
