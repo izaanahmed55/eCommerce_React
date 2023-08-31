@@ -19,7 +19,7 @@ const Cart = () => {
         if(res.isConfirmed){
           localStorage.clear()
           dispatch(removeSelectedProduct())
-          window.location.reload()
+          window.location.href = window.location.href;
         }
       })
     }
