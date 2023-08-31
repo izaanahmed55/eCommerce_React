@@ -43,7 +43,6 @@ const ProductComponent = () => {
             const myCartLocalStorage = localStorage.getItem("myCart");
             const cartClone = myCartLocalStorage ? JSON.parse(myCartLocalStorage) : []; 
             
-            
             let isPresentInCart = cartClone?.filter(eachCartItem => eachCartItem.id == product.id);
             
             if(isPresentInCart.length > 0) {

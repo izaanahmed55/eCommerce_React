@@ -1,22 +1,51 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+
+    const loginSuccessAlert = () => {
+        toast('✔ Signed In Successfully', {
+            position: "bottom-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+    }
+
+    const loginFailedAlert = () => {
+        toast('Please Enter Valid Credentials', {
+            position: "bottom-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+    }
 
     const validate = () => {
         let result = true;
 
         if (userName == "" || userName == null) {
             result = false;
-            toast.error("Please Enter Username");
+            toast.error("Please Enter Username", {
+                position: "bottom-right"});
         }
 
         else if (password == "" || password == null) {
             result = false;
-            toast.error("Please Enter Password");
+            toast.error("Please Enter Password", {
+                position: "bottom-right"});
         }
 
         else {
@@ -41,10 +70,10 @@ const SignUp = () => {
             const index = storedUsernames.indexOf(enteredUsername);
 
             if (index !== -1 && storedPasswords[index] === enteredPassword) {
-                toast.success("Login Successful!");
+                loginSuccessAlert();
                 navigate("/");
             } else {
-                toast.error("Please Enter Valid Credentials");
+                loginFailedAlert();
             }
         }
     };
@@ -103,7 +132,7 @@ const SignUp = () => {
 
                         <div>
                             <button
-                                onClick={e => proceedLogin()}
+                                onClick={e => proceedLogin(e)}
                                 className="flex w-full bg-[#252C32] justify-center rounded-md text-[#252C32] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:text-[#252C32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:text-[#252C32]"
                             >
                                 Sign In
@@ -122,6 +151,7 @@ const SignUp = () => {
                     </p>
                 </div>
             </div>
+            <ToastContainer/>
         </>
     );
 };

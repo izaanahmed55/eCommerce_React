@@ -1,11 +1,25 @@
 import { useState } from "react";
-import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
-    const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
+    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
 
-    const RegisterUser = (e) => {
+    const userRegisterAlert = () => {
+        toast('✔ Sign Up Successful', {
+            position: "bottom-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+    }
+
+    const registerUser = (e) => {
         e.preventDefault();
 
         let usernames = JSON.parse(localStorage.getItem("UserNames")) || [];
@@ -16,6 +30,9 @@ const SignUp = () => {
 
         localStorage.setItem("UserNames", JSON.stringify(usernames));
         localStorage.setItem("Passwords", JSON.stringify(passwords));
+
+        userRegisterAlert();
+    
     };
 
     return (
@@ -44,7 +61,7 @@ const SignUp = () => {
                                     name="userName"
                                     type="userName"
                                     value={userName}
-                                    onChange={(e) =>
+                                    onChange={e =>
                                         setUserName(e.target.value)
                                     }
                                     required
@@ -65,7 +82,7 @@ const SignUp = () => {
                                     name="password"
                                     type="password"
                                     value={password}
-                                    onChange={(e) =>
+                                    onChange={e =>
                                         setPassword(e.target.value)
                                     }
                                     required
@@ -76,8 +93,8 @@ const SignUp = () => {
 
                         <div>
                             <button
-                                onClick={RegisterUser}
-                                className="flex w-full bg-[#252C32] justify-center rounded-md text-[#252C32] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:text-[#252C32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:text-[#252C32]"
+                                onClick={e => registerUser(e)}
+                                className="flex w-full bg-[#252C32] justify-center rounded-md text-[#252C32] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:text-gray-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:text-[#252C32]"
                             >
                                 Sign up
                             </button>
@@ -85,6 +102,7 @@ const SignUp = () => {
                     </form>
                 </div>
             </div>
+            <ToastContainer/>
         </>
     );
 };
