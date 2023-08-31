@@ -44,19 +44,12 @@ const Header = () => {
                                 <path d="M1 1h4l2.25 10.46a2 2 0 0 0 2.74 1.14l8.11-4.78M5.25 15.46L6.5 9" />
                             </svg>
                             <span className="ml-2 font-semibold text-white">
-                                Shop Now
+                                Bliss Bazaar
                             </span>
                         </div>
                     </Link>
 
                     <div className="ml-6 flex flex-1 gap-x-3">
-                        {/* <div className="flex cursor-pointer select-none items-center gap-x-2 rounded-md border bg-[#4094F7] py-2 px-4 text-white hover:bg-blue-500">
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                              </svg>
-                              <span className="text-sm font-medium">Categories</span>
-                            </div> */}
-
                         <input
                             type="text"
                             className="w-full rounded-md border border-[#DDE2E4] px-3 py-2 text-sm"

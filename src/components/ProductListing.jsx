@@ -3,6 +3,7 @@ import { useDispatch} from 'react-redux'
 import ProductComponent from './ProductComponent'
 import axios from 'axios'
 import { setProducts } from '../redux/actions/productActions'
+import Hero from './Hero'
 
 const ProductListing = () => {
 
@@ -21,6 +22,7 @@ const ProductListing = () => {
 
   return (
     <>
+        <Hero/>
         <ProductComponent/>
     </>
   )
