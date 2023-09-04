@@ -2,10 +2,13 @@ import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { removeSelectedProduct } from "../redux/actions/productActions";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
 
   const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   const getLocalStorage = JSON.parse(localStorage.getItem('myCart'));
   const itemsArray = getLocalStorage;
@@ -19,7 +22,7 @@ const Cart = () => {
         if(res.isConfirmed){
           localStorage.clear()
           dispatch(removeSelectedProduct())
-          window.location.href = window.location.href;
+          navigate('/cart')
         }
       })
     }

@@ -10,6 +10,8 @@ import {
 import { ActionTypes } from "../redux/constants/action-types";
 import Swal from "sweetalert2";
 import FadeLoader from "react-spinners/FadeLoader";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetails = () => {
     const product = useSelector((state) => state.product);
@@ -355,6 +357,7 @@ const ProductDetails = () => {
                     </div>
                 </section>
             )}
+            <ToastContainer/>
         </div>
     );
 };
