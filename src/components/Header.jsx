@@ -83,9 +83,13 @@ const Header = () => {
                         </Link>
 
                         <Link to={`/signin`}>
-                          <div className="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border py-2 px-4 text-white">
-                              <span className="text-sm font-medium">Sign in</span>
-                          </div>
+                          <button>
+                            <div className="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border py-2 px-4 text-white">
+                                <span className="text-sm font-medium">
+                                    Sign In
+                                </span>
+                            </div>
+                          </button>
                         </Link>
                     </div>
                 </div>
@@ -106,17 +110,10 @@ const Header = () => {
                         </svg>
                         <span className="text-md text-white font-medium">Pakistan</span>
                     </div>
+                    <div className="flex gap-x-2 py-1 px-2">
+                        <span className="text-md text-white font-medium">  Welcome </span>
+                    </div>
 
-                    {/* <div className="flex gap-x-8">
-                          <span className="cursor-pointer rounded-sm py-1 px-2 text-sm font-medium hover:bg-gray-100">Best seller</span>
-                          <span className="cursor-pointer rounded-sm py-1 px-2 text-sm font-medium hover:bg-gray-100">New Releases</span>
-                          <span className="cursor-pointer rounded-sm py-1 px-2 text-sm font-medium hover:bg-gray-100">Books</span>
-                          <span className="cursor-pointer rounded-sm py-1 px-2 text-sm font-medium hover:bg-gray-100">Computers</span>
-                          <span className="cursor-pointer rounded-sm py-1 px-2 text-sm font-medium hover:bg-gray-100">Fashion</span>
-                          <span className="cursor-pointer rounded-sm py-1 px-2 text-sm font-medium hover:bg-gray-100">Health</span>
-                          <span className="cursor-pointer rounded-sm py-1 px-2 text-sm font-medium hover:bg-gray-100">Pharmacy</span>
-                          <span className="cursor-pointer rounded-sm py-1 px-2 text-sm font-medium hover:bg-gray-100">Toys & Games</span>
-                        </div> */}
                 </div>
             </div>
         </div>

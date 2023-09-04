@@ -1,85 +1,76 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from "react-router-dom";
+// import { ToastContainer, toast } from "react-toastify";
+// import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
-    const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
 
-    const navigate = useNavigate()
+    const [user, setUser] = useState({
+        username: "", 
+        password: "",
+    });
 
-    const loginSuccessAlert = () => {
-        toast('✔ Signed In Successfully', {
-            position: "bottom-right",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
-    }
-
-    const loginFailedAlert = () => {
-        toast('Please Enter Valid Credentials', {
-            position: "bottom-right",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
-    }
-
-    const validate = () => {
-        let result = true;
-
-        if (userName == "" || userName == null) {
-            result = false;
-            toast.error("Please Enter Username", {
-                position: "bottom-right"});
-        }
-
-        else if (password == "" || password == null) {
-            result = false;
-            toast.error("Please Enter Password", {
-                position: "bottom-right"});
-        }
-
-        else {
-            result = true
-        }
-
-        return result;
+    const handleChange = (e) => {
+        setUser({ 
+            ...user, 
+            [e.target.name]: e.target.value });
+    
     };
 
-    const proceedLogin = (e) => {
+    // axios.get('http://localhost:3000/all-users')
+    // .then((res) => console.log(res.data))
+
+    const onSubmit = (e) => {
         e.preventDefault();
-
-        if (validate()) {
-            const enteredUsername = userName;
-            const enteredPassword = password;
-
-            const storedUsernames =
-                JSON.parse(localStorage.getItem("UserNames")) || [];
-            const storedPasswords =
-                JSON.parse(localStorage.getItem("Passwords")) || [];
-
-            const index = storedUsernames.indexOf(enteredUsername);
-
-            if (index !== -1 && storedPasswords[index] === enteredPassword) {
-                loginSuccessAlert();
-                navigate("/");
-            } else {
-                loginFailedAlert();
-            }
+        console.log(e)
+        if (user.username !== "" && user.password !== "") {
+            axios.post("http://localhost:3000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: {
+                    "username": user.username,
+                    "password": user.password,
+                }
+            }).then((res) => {
+                console.log(res.data)
+                    if (res.success == true) {
+                        console.log(res);
+                        // handleLogin();
+                    }
+                });
         }
     };
+
+
+
+    // const loginSuccessAlert = () => {
+    //     toast('✔ Signed In Successfully', {
+    //         position: "bottom-right",
+    //         autoClose: 4000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "dark",
+    //         });
+    // }
+
+    // const loginFailedAlert = () => {
+    //     toast('Please Enter Valid Credentials', {
+    //         position: "bottom-right",
+    //         autoClose: 4000,
+    //         hideProgressBar: false,
+    //         closeOnClick: true,
+    //         pauseOnHover: true,
+    //         draggable: true,
+    //         progress: undefined,
+    //         theme: "dark",
+    //         });
+    // }
 
     return (
         <>
@@ -103,12 +94,11 @@ const SignUp = () => {
                             </label>
                             <div className="mt-2">
                                 <input
-                                    id="userName"
-                                    name="userName"
-                                    type="userName"
-                                    value={userName}
-                                    onChange={(e) => setUserName(e.target.value)}
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    name="username"
+                                    type="text"
+                                    value={user.username}
+                                    onChange={(e) => handleChange(e)}
+                                    className="block w-full rounded-md border-1 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
@@ -121,21 +111,18 @@ const SignUp = () => {
                             </div>
                             <div className="mt-2">
                                 <input
-                                    id="password"
                                     name="password"
                                     type="password"
-                                    value={password}
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    value={user.password}
+                                    onChange={(e) => handleChange(e)}
+                                    className="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
                         </div>
 
                         <div>
                             <button
-                                onClick={e => proceedLogin(e)}
+                                onClick={(e) => onSubmit(e)}
                                 className="flex w-full bg-[#252C32] justify-center rounded-md text-[#252C32] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:text-[#252C32] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:text-[#252C32]"
                             >
                                 Sign In
@@ -154,7 +141,7 @@ const SignUp = () => {
                     </p>
                 </div>
             </div>
-            <ToastContainer/>
+            {/* <ToastContainer/> */}
         </>
     );
 };

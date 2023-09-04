@@ -6,8 +6,8 @@ import {
     selectedProduct,
     removeSelectedProduct,
     cartCounter,
+    addToCart,
 } from "../redux/actions/productActions";
-import { ActionTypes } from "../redux/constants/action-types";
 import Swal from "sweetalert2";
 import FadeLoader from "react-spinners/FadeLoader";
 import { ToastContainer, toast } from "react-toastify";
@@ -55,59 +55,49 @@ const ProductDetails = () => {
         localStorage.setItem("myCart", JSON.stringify(response.data));
     };
 
-    const cartHandle = (product) => {
+    const cartHandle = (e, product) => {
+        e.preventDefault()
         let data = { name: "Cart Data", value: product };
-        dispatch({ type: ActionTypes.ADD_TO_CART, payload: data });
+        dispatch(addToCart(data));
 
         if (product.stock > 0) {
-            const myCartLocalStorage = localStorage.getItem("myCart");
-            const cartClone = myCartLocalStorage
-                ? JSON.parse(myCartLocalStorage)
-                : [];
+          const myCartLocalStorage = localStorage.getItem("myCart");
+          const cartClone = myCartLocalStorage ? JSON.parse(myCartLocalStorage) : []; 
+          
+          let isPresentInCart = cartClone?.filter(eachCartItem => eachCartItem.id == product.id);
+          
+          if(isPresentInCart.length > 0) {
+              Swal.fire({ title: 'Item already in your cart, Do you want to update the quantity ?', 
+              icon: 'warning', showCancelButton: true, confirmButtonText: `Update`, confirmButtonColor: 
+              '#bf1e2e', cancelButtonColor: '#808080', }).then((res) => {
+                  if (res.isConfirmed) { 
 
-            let isPresentInCart = cartClone?.filter(eachCartItem => eachCartItem.id == product.id);
+                      let updatedCartAsOfClone = cartClone.map((eachCartItem)=>{ 
+                          if(eachCartItem.id === product.id){ 
+                              return{ 
+                                  ...eachCartItem, counter:eachCartItem.counter + product.counter, isPresentInCart, 
+                              } 
+                          } 
+                              return eachCartItem; 
+                          }); 
+                          
+                          quantityUpdateAlert();
+                          localStorage.setItem("myCart", JSON.stringify(updatedCartAsOfClone));
+                      } 
+                  }
+              ) 
+          } 
 
-            if (isPresentInCart.length > 0) {
-                Swal.fire({
-                    title: "Item already in your cart, Do you want to update the quantity ?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: `Update`,
-                    confirmButtonColor: "#bf1e2e",
-                    cancelButtonColor: "#808080",
-                }).then((res) => {
-                    if (res.isConfirmed) {
-                        let updatedCartAsOfClone = cartClone.map(
-                            (eachCartItem) => {
-                                if (eachCartItem.id === product.id) {
-                                    return {
-                                        ...eachCartItem,
-                                        counter:
-                                            eachCartItem.counter +
-                                            product.counter,
-                                        isPresentInCart,
-                                    };
-                                }
-                                return eachCartItem;
-                            }
-                        );
-
-                        quantityUpdateAlert();
-                        localStorage.setItem(
-                            "myCart",
-                            JSON.stringify(updatedCartAsOfClone)
-                        );
-                    }
-                });
-            } else {
-                addToCartAlert()
-                cartClone.push(product);
-                localStorage.setItem("myCart", JSON.stringify(cartClone));
-                dispatch(cartCounter(cartClone.length));
-            }
-        } else {
-            Swal.fire("Item not Added", "Product Out of Stock", "error");
-        }
+          else{ 
+              addToCartAlert()
+              cartClone.push(product);
+              localStorage.setItem("myCart", JSON.stringify(cartClone)); 
+              dispatch(cartCounter(cartClone.length))
+          } 
+      } 
+      else{
+          Swal.fire( 'Item not Added', 'Product Out of Stock', 'error' ) 
+      }
     };
 
     useEffect(() => {
@@ -269,7 +259,7 @@ const ProductDetails = () => {
                                     </div>
 
                                     <button
-                                        onClick={() => cartHandle(product)}
+                                        onClick={(e) => cartHandle(e, product)}
                                         type="button"
                                         className="inline-flex items-center justify-center rounded-md border-2 border-transparent bg-gray-900 bg-none px-12 py-3 text-center text-base font-bold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800"
                                     >
