@@ -3,7 +3,8 @@ import {
     addToCart, 
     cartCounter, 
     productReducer, 
-    selectedProductReducer 
+    selectedProductReducer,
+    loggedInUser
 } from './productReducer'
 
 const reducers = combineReducers({
@@ -11,6 +12,7 @@ const reducers = combineReducers({
     product: selectedProductReducer,
     cart: addToCart,
     cartLength: cartCounter,
+    username: loggedInUser,
 });
  
 export default reducers;

@@ -7,7 +7,13 @@ import { Link } from "react-router-dom";
 const Header = () => {
     const [input, setInput] = useState("");
     const noOfItems = useSelector((state) => state.cartLength.payload);
+    const username = useSelector((state) => state.username.payload)
     const dispatch = useDispatch();
+
+    const Logout = () => {
+        console.log("User Logged Out")
+        window.location.reload()
+    }
 
     const searchHandler = (e) => {
         e.preventDefault();
@@ -83,13 +89,20 @@ const Header = () => {
                         </Link>
 
                         <Link to={`/signin`}>
-                          <button>
+                          {username && <button onClick={Logout}>
+                            <div className="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border py-2 px-4 text-white">
+                                <span className="text-sm font-medium">
+                                    Logout
+                                </span>
+                            </div>
+                          </button>}
+                          {username=='' || username==null && <button>
                             <div className="ml-2 flex cursor-pointer items-center gap-x-1 rounded-md border py-2 px-4 text-white">
                                 <span className="text-sm font-medium">
                                     Sign In
                                 </span>
                             </div>
-                          </button>
+                          </button>}
                         </Link>
                     </div>
                 </div>
@@ -111,7 +124,7 @@ const Header = () => {
                         <span className="text-md text-white font-medium">Pakistan</span>
                     </div>
                     <div className="flex gap-x-2 py-1 px-2">
-                        <span className="text-md text-white font-medium">  Welcome </span>
+                        <span className="text-md text-white font-medium">  Lets start Shopping {username ? username : ''} </span>
                     </div>
 
                 </div>

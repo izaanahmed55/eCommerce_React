@@ -5,5 +5,6 @@ export const ActionTypes = {
     ADD_TO_CART: "ADD_TO_CART",
     REMOVE_FROM_CART: "REMOVE_FROM_CART",
     CART_COUNTER: "CART_COUNTER",
+    LOGGED_IN_USER: "LOGGED_IN_USER"
     
 }

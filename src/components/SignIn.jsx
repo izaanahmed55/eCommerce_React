@@ -1,31 +1,33 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-// import { ToastContainer, toast } from "react-toastify";
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { loggedInUser } from "../redux/actions/productActions";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const [user, setUser] = useState({
-        username: "", 
-        password: "",
+        username: '', 
+        password: '',
     });
 
     const handleChange = (e) => {
         setUser({ 
             ...user, 
-            [e.target.name]: e.target.value });
+            [e.target.name]: e.target.value 
+        });
     
     };
 
-    // axios.get('http://localhost:3000/all-users')
-    // .then((res) => console.log(res.data))
-
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(e)
-        if (user.username !== "" && user.password !== "") {
-            axios.post("http://localhost:3000/login", {
+        if (user.username !== '' && user.password !== '') {
+            axios.post("http://localhost:3000/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -33,18 +35,21 @@ const SignUp = () => {
                 body: {
                     "username": user.username,
                     "password": user.password,
-                }
+                  }
+
             }).then((res) => {
                 console.log(res.data)
-                    if (res.success == true) {
-                        console.log(res);
-                        // handleLogin();
+                    if (res.data.success == true) {
+                        console.log("Logged In Successfully");
+                        dispatch(loggedInUser(user.username))
+                        navigate('/')
+                    }
+                    else{
+                        loginFailedAlert()
                     }
                 });
         }
     };
-
-
 
     // const loginSuccessAlert = () => {
     //     toast('✔ Signed In Successfully', {
@@ -59,18 +64,18 @@ const SignUp = () => {
     //         });
     // }
 
-    // const loginFailedAlert = () => {
-    //     toast('Please Enter Valid Credentials', {
-    //         position: "bottom-right",
-    //         autoClose: 4000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //         });
-    // }
+    const loginFailedAlert = () => {
+        toast('Please Enter Valid Credentials', {
+            position: "bottom-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+    }
 
     return (
         <>
@@ -130,7 +135,7 @@ const SignUp = () => {
                         </div>
                     </form>
 
-                    <p className="mt-10 text-center text-sm text-gray-500">
+                    {/* <p className="mt-10 text-center text-sm text-gray-500">
                         Not a member?{" "}
                         <Link
                             to="/signup"
@@ -138,10 +143,10 @@ const SignUp = () => {
                         >
                             Sign Up
                         </Link>
-                    </p>
+                    </p> */}
                 </div>
             </div>
-            {/* <ToastContainer/> */}
+            <ToastContainer/>
         </>
     );
 };

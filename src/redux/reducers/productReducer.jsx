@@ -5,6 +5,7 @@ const initialState = {
   cart: {},
   Items: {},
   Len: 0,
+  LoggedInUser: ''
 };
 
 export const productReducer = (state = initialState.products, { type, payload }) => {
@@ -51,6 +52,17 @@ export const addToCart = (state = initialState.cart, { type, payload }) => {
 export const cartCounter = (state = initialState.Len, { type, payload }) => {
   switch (type) {
     case ActionTypes.CART_COUNTER:
+      return{
+        payload
+      }
+    default:
+      return state
+  }
+}
+
+export const loggedInUser = (state = initialState.LoggedInUser, {type, payload}) => {
+  switch (type) {
+    case ActionTypes.LOGGED_IN_USER:
       return{
         payload
       }
