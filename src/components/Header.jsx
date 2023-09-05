@@ -124,7 +124,7 @@ const Header = () => {
                         <span className="text-md text-white font-medium">Pakistan</span>
                     </div>
                     <div className="flex gap-x-2 py-1 px-2">
-                        <span className="text-md text-white font-medium">  Lets start Shopping {username ? username : ''} </span>
+                        <span className="text-md text-white font-medium">  Lets Start Shopping {username ? username : ''} </span>
                     </div>
 
                 </div>

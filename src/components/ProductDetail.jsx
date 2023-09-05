@@ -52,7 +52,6 @@ const ProductDetails = () => {
                 console.log("Err", error);
             });
         dispatch(selectedProduct(response.data));
-        localStorage.setItem("myCart", JSON.stringify(response.data));
     };
 
     const cartHandle = (e, product) => {
