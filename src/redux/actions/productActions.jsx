@@ -33,10 +33,3 @@ export const cartCounter = (cartLength) => {
         payload: cartLength,
     }
 } 
-
-export const loggedInUser = (username) => {
-    return {
-        type: ActionTypes.LOGGED_IN_USER,
-        payload: username,
-    }
-}
