@@ -2,80 +2,49 @@ import axios from "axios";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { loggedInUser } from "../redux/actions/productActions";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
 
-    const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const [user, setUser] = useState({
-        username: '', 
-        password: '',
-    });
-
-    const handleChange = (e) => {
-        setUser({ 
-            ...user, 
-            [e.target.name]: e.target.value 
-        });
-    
-    };
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (user.username !== '' && user.password !== '') {
-            axios.post("http://localhost:3000/api/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: {
-                    "username": user.username,
-                    "password": user.password,
-                  }
 
-            }).then((res) => {
-                console.log(res.data)
-                    if (res.data.success == true) {
-                        console.log("Logged In Successfully");
-                        dispatch(loggedInUser(user.username))
-                        navigate('/')
-                    }
-                    else{
-                        loginFailedAlert()
-                    }
-                });
-        }
-    };
-
-    // const loginSuccessAlert = () => {
-    //     toast('✔ Signed In Successfully', {
-    //         position: "bottom-right",
-    //         autoClose: 4000,
-    //         hideProgressBar: false,
-    //         closeOnClick: true,
-    //         pauseOnHover: true,
-    //         draggable: true,
-    //         progress: undefined,
-    //         theme: "dark",
-    //         });
-    // }
-
-    const loginFailedAlert = () => {
-        toast('Please Enter Valid Credentials', {
-            position: "bottom-right",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
+        axios.post('http://localhost:3000/user/signin', {
+            email: email,
+            password: password
+        })
+        .then(() => {  
+            toast('✔ Sign In Successful', {
+                position: "bottom-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                })
+            navigate('/')
+          })
+          .catch((error) => {
+            toast(error?.response?.data?.error, {
+                position: "bottom-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
             });
-    }
+          })
+        
+    };
 
     return (
         <>
@@ -95,14 +64,14 @@ const SignUp = () => {
                     <form className="space-y-6">
                         <div>
                             <label className="block text-sm font-medium leading-6 text-gray-900">
-                                User Name
+                                Email
                             </label>
                             <div className="mt-2">
                                 <input
-                                    name="username"
+                                    name="email"
                                     type="text"
-                                    value={user.username}
-                                    onChange={(e) => handleChange(e)}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     className="block w-full rounded-md border-1 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
@@ -118,8 +87,8 @@ const SignUp = () => {
                                 <input
                                     name="password"
                                     type="password"
-                                    value={user.password}
-                                    onChange={(e) => handleChange(e)}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     className="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
                             </div>
@@ -135,7 +104,7 @@ const SignUp = () => {
                         </div>
                     </form>
 
-                    {/* <p className="mt-10 text-center text-sm text-gray-500">
+                    <p className="mt-10 text-center text-sm text-gray-500">
                         Not a member?{" "}
                         <Link
                             to="/signup"
@@ -143,7 +112,7 @@ const SignUp = () => {
                         >
                             Sign Up
                         </Link>
-                    </p> */}
+                    </p>
                 </div>
             </div>
             <ToastContainer/>

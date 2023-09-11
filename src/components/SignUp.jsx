@@ -1,38 +1,49 @@
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 
 const SignUp = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
-
-    const userRegisterAlert = () => {
-        toast('✔ Sign Up Successful', {
-            position: "bottom-right",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
-    }
+    const [email, setEmail] = useState('');
 
     const registerUser = (e) => {
         e.preventDefault();
-
-        let usernames = JSON.parse(localStorage.getItem("UserNames")) || [];
-        let passwords = JSON.parse(localStorage.getItem("Passwords")) || [];
-
-        usernames.push(userName);
-        passwords.push(password);
-
-        localStorage.setItem("UserNames", JSON.stringify(usernames));
-        localStorage.setItem("Passwords", JSON.stringify(passwords));
-
-        userRegisterAlert();
-    
+        
+        axios.post('http://localhost:3000/user/signup', {
+            username: userName,
+            email: email,
+            password: password
+        })
+        .then(() => {
+            toast('✔ Sign Up Successful', {
+                position: "bottom-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+                });
+          }).then(() => {
+            setEmail(''),
+            setUserName(''),
+            setPassword('')
+          })
+          .catch((error) => {
+            toast.error(error?.response?.data?.error, {
+                position: "bottom-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+          })
     };
 
     return (
@@ -62,6 +73,24 @@ const SignUp = () => {
                                     value={userName}
                                     onChange={e =>
                                         setUserName(e.target.value)
+                                    }
+                                    className="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium leading-6 text-gray-900">
+                                Email
+                            </label>
+                            <div className="mt-2">
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    value={email}
+                                    onChange={e =>
+                                        setEmail(e.target.value)
                                     }
                                     className="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />

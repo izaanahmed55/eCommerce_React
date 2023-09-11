@@ -4,7 +4,6 @@ import {
     cartCounter, 
     productReducer, 
     selectedProductReducer,
-    loggedInUser
 } from './productReducer'
 
 const reducers = combineReducers({
@@ -12,7 +11,6 @@ const reducers = combineReducers({
     product: selectedProductReducer,
     cart: addToCart,
     cartLength: cartCounter,
-    username: loggedInUser,
 });
  
 export default reducers;
