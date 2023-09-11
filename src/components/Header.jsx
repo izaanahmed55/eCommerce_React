@@ -6,12 +6,10 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
     const [input, setInput] = useState("");
-    const [searchedCategory, setSearchedCategory] = useState('')
+    // const [searchedCategory, setSearchedCategory] = useState('')
 
     const noOfItems = useSelector((state) => state.cartLength.payload);
     const dispatch = useDispatch();
-
-    console.log(searchedCategory)
 
     // const Logout = () => {
     //     console.log("User Logged Out")
@@ -41,7 +39,6 @@ const Header = () => {
     //         });
     //     dispatch(setProducts(response.data));
     // }
-
 
     return (
         <div className="bg-black">
@@ -138,7 +135,12 @@ const Header = () => {
                     </div>
                                
                     <div>
-                        <select id="categories" onChange={(e) => setSearchedCategory(e.target.value)} className="w-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <select id="categories" 
+                        // onChange={(e) => setSearchedCategory(e.target.value)} 
+                        className="w-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                        focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 
+                        dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
+                        dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option defaultValue="Choose a category">Choose a category</option>
                             <option value="smartphones">Smart Phones</option>
                             <option value="laptops">Laptops</option>

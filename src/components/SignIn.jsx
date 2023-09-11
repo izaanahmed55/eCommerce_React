@@ -42,8 +42,7 @@ const SignUp = () => {
                 progress: undefined,
                 theme: "dark",
             });
-          })
-        
+          })       
     };
 
     return (
