@@ -1,20 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "../redux/actions/productActions";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
     const [input, setInput] = useState("");
-    // const [searchedCategory, setSearchedCategory] = useState('')
+    const [searchedCategory, setSearchedCategory] = useState('')
 
     const noOfItems = useSelector((state) => state.cartLength.payload);
     const dispatch = useDispatch();
 
-    // const Logout = () => {
-    //     console.log("User Logged Out")
-    //     window.location.reload()
-    // }
+    useEffect(() => {
+        getSearchedCategory()
+    }, [searchedCategory])
 
     const searchHandler = (e) => {
         e.preventDefault();
@@ -31,14 +30,14 @@ const Header = () => {
         dispatch(setProducts(response.data));
     };
 
-    // const getSearchedCategory = async () => {
-    //     const response = await axios
-    //         .get(`https://dummyjson.com/products/category/${searchedCategory}`)
-    //         .catch((err) => {
-    //             console.log("Err", err);
-    //         });
-    //     dispatch(setProducts(response.data));
-    // }
+    const getSearchedCategory = async () => {
+        const response = await axios
+            .get(`https://dummyjson.com/products/category/${searchedCategory}`)
+            .catch((err) => {
+                console.log("Err", err);
+            });
+        dispatch(setProducts(response.data));
+    }
 
     return (
         <div className="bg-black">
@@ -136,7 +135,7 @@ const Header = () => {
                                
                     <div>
                         <select id="categories" 
-                        // onChange={(e) => setSearchedCategory(e.target.value)} 
+                        onChange={(e) => setSearchedCategory(e.target.value)} 
                         className="w-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                         focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 dark:bg-gray-700 
                         dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
