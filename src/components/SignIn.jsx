@@ -1,60 +1,76 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const SignUp = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const SignIn = (props) => {
+  const [email, setEmail] = useState("admin@gmail.com");
+  const [password, setPassword] = useState("admin");
 
-  const onSubmit = (e) => {
+  const nav = useNavigate();
+
+  const refreshAuth = async () => {
+    const isLoggedInResponse = await axios.post(
+      `http://localhost:3000/user/isloggedin`,
+      {},
+      { withCredentials: true }
+    );
+    const response = isLoggedInResponse.data;
+    console.log("IsloggedIn : ", response);
+    if (response.auth) {
+      nav("/");
+    }
+  };
+
+  useEffect(() => {
+    refreshAuth();
+  }, [props.isLogin]);
+
+  const onSubmit = async (e) => {
+    props.setIsLogin(false);
     e.preventDefault();
 
-    axios
-      .post("http://localhost:3000/user/signin", {
-        email: email,
-        password: password,
-      })
-      .then((res) => {
-        toast("✔ Sign In Successful", {
-          position: "bottom-right",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+    try {
+      // Sign In
+      const signInResponse = await axios.post(
+        "http://localhost:3000/user/signin",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
-        localStorage.setItem("User", JSON.stringify(res));
-      })
-      .catch((error) => {
-        toast(error?.response?.data?.error, {
-          position: "bottom-right",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+      // Display a success message
+      toast("✔ Sign In Successful", {
+        position: "bottom-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
       });
 
-    axios
-      .post(
-        `http://localhost:3000/user/isloggedin`,
-        {},
-        { withCredentials: true }
-      )
-      .then((res) => {
-        console.log(res?.data);
-      })
-      .catch((error) => {
-        console.error(error);
+      localStorage.setItem("User", JSON.stringify(signInResponse.data));
+      props.setIsLogin(true);
+    } catch (error) {
+      // Handle sign-in error
+      toast(error?.response?.data?.message || "Sign In Failed", {
+        position: "bottom-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
       });
+    }
   };
 
   return (
@@ -131,4 +147,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;

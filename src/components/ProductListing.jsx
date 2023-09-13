@@ -27,16 +27,16 @@ const ProductListing = () => {
   const prevPage = (e) => {
     e.target.value;
     setPage(page - 1);
-    if(page < 2){
-        setPage(10)
+    if (page < 2) {
+      setPage(10);
     }
   };
 
   const nextPage = (e) => {
     e.target.value;
     setPage(page + 1);
-    if(page > 9){
-        setPage(1)
+    if (page > 9) {
+      setPage(1);
     }
   };
 
