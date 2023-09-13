@@ -7,6 +7,7 @@ import Cart from './components/Cart'
 import CheckOut from './components/CheckOut'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
+import UserProfile from './components/UserProfile'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path='/checkout' Component={CheckOut}/>
           <Route path='/signin' Component={SignIn}/>
           <Route path='/signup' Component={SignUp}/>
+          <Route path='/userprofile' Component={UserProfile}/>
           <Route> 404 Not Found! </Route> 
         </Routes>
       </Router>

@@ -5,6 +5,7 @@ const initialState = {
   cart: {},
   Items: {},
   Len: 0,
+  loggedInUser: {}
 };
 
 export const productReducer = (state = initialState.products, { type, payload }) => {
@@ -58,3 +59,4 @@ export const cartCounter = (state = initialState.Len, { type, payload }) => {
       return state
   }
 }
+

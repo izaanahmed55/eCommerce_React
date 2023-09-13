@@ -26,11 +26,11 @@ const SignUp = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "dark",
-                });
-          }).then(() => {
-            setEmail(''),
-            setUserName(''),
-            setPassword('')
+                })
+
+                setEmail(''),
+                setUserName(''),
+                setPassword('')
           })
           .catch((error) => {
             toast.error(error?.response?.data?.error, {
