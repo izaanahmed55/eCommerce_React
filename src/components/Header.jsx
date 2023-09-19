@@ -3,6 +3,7 @@ import { setProducts } from "../redux/actions/productActions";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { backendurl } from "../../config";
 
 const Header = (props) => {
     const [input, setInput] = useState("");
