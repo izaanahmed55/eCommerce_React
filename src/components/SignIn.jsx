@@ -19,7 +19,8 @@ const SignIn = (props) => {
     );
     const response = isLoggedInResponse.data;
     console.log("IsloggedIn : ", response);
-    if (response.auth) {
+    console.log("isLoggedInResponse : ", isLoggedInResponse);
+    if (isLoggedInResponse.auth) {
       nav("/");
     }
   };
