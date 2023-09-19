@@ -40,9 +40,9 @@ const SignIn = (props) => {
           email: email,
           password: password,
         },
-        {
-          withCredentials: true,
-        }
+        // {
+        //   withCredentials: true,
+        // }
       );
 
       // Display a success message
