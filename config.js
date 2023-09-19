@@ -1,3 +1,3 @@
-const mode = 'development'
-export const backendurl = mode == 'development' ? 'http://localhost:3000' : 'https://ecommerce-backend-jwt.vercel.app'
+const localhost = false
+export const backendurl = localhost ? 'http://localhost:3000' : 'https://ecommerce-backend-jwt.vercel.app'
 
