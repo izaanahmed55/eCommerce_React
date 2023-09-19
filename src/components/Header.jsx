@@ -13,7 +13,7 @@ const Header = (props) => {
 
     const refreshAuth = async () => {
         const isLoggedInResponse = await axios.post(
-            `http://localhost:3000/user/isloggedin`,
+            `${backendurl}/user/isloggedin`,
             {},
             { withCredentials: true }
         );
@@ -44,7 +44,7 @@ const Header = (props) => {
 
     const handleLogout = async () => {
         const isLoggedInResponse = await axios.post(
-            `http://localhost:3000/user/logOut`,
+            `${backendurl}/user/logOut`,
             {},
             { withCredentials: true }
         );

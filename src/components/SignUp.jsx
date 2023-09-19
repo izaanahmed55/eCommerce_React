@@ -11,7 +11,7 @@ const SignUp = () => {
     const registerUser = (e) => {
         e.preventDefault();
         
-        axios.post('http://localhost:3000/user/signup', {
+        axios.post(`${backendurl}/user/signup`, {
             username: userName,
             email: email,
             password: password
