@@ -14,8 +14,8 @@ const SignIn = (props) => {
     const refreshAuth = async () => {
         const isLoggedInResponse = await axios.post(
             `${backendurl}/user/isloggedin`,
-            {}
-            // { withCredentials: true }
+            {},
+            { withCredentials: true }
         );
         const response = isLoggedInResponse.data;
         console.log("IsloggedIn : ", response);
@@ -40,10 +40,10 @@ const SignIn = (props) => {
                 {
                     email: email,
                     password: password,
+                },
+                {
+                  withCredentials: true,
                 }
-                // {
-                //   withCredentials: true,
-                // }
             );
 
             // Display a success message
