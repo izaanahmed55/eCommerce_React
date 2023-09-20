@@ -1,38 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const Hero = () => {
     return (
         <>
-            <div className="dark:bg-gray-800 bg-white relative overflow-hidden">
-                <div className="bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
-                    <div className="container mx-auto px-6 flex relative py-16">
-                        <div className="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
-                            <span className="w-20 h-2 bg-gray-800 dark:bg-white mb-12"></span>
-                            <h1 className="font-bebas-neue uppercase text-xl sm:text-7xl font-black flex flex-col leading-none dark:text-white text-gray-800">
-                                Shop at Bliss Bazaar
-                            </h1>
-                            <p className="text-sm sm:text-base pt-4 text-gray-700 dark:text-white">
+            <section className="bg-white dark:bg-gray-900">
+                <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+                    <div className="mr-auto place-self-center lg:col-span-7">
+                        <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
+                            Shop Now At BLISS BAZAAR
+                        </h1>
+                        <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
                             Unlock a World of Shopping Delight: Explore Our Exquisite Collection Today!
-                            </p>
-                            <div className="flex mt-8">
-                                <Link
-                                    to="/product/7"
-                                    className="uppercase py-2 px-4 rounded-lg text-sm bg-gray-800 border-2 border-transparent text-white text-md mr-4 hover:bg-gray-500"
-                                >
-                                    Get Our Latest Galaxy Book Now
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="hidden justify-center sm:block sm:w-1/3 lg:w-3/5 relative">
-                            <img
-                                src="https://i.dummyjson.com/data/products/7/thumbnail.jpg"
-                                className="max-w-s h-full md:max-w-m m-auto"
-                            />
-                        </div>
+                        </p>
+                    </div>
+                    <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
+                        <img
+                            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png"
+                            alt="mockup"
+                        />
                     </div>
                 </div>
-            </div>
+            </section>
         </>
     );
 };
